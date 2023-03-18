@@ -1,1 +1,1 @@
-![Flow](Flow.jpg)
+![Flow](Flow.png)
