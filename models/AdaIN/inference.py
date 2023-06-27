@@ -2,7 +2,7 @@ import torch
 import numpy as np
 
 from .net import vgg, decoder
-from .function import adptive_instance_normalization, coral
+from .function import adaptive_instance_normalization, coral
 
 
 class StyleTransfer:
