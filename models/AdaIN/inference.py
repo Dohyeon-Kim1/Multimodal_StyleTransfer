@@ -7,9 +7,9 @@ from .function import adaptive_instance_normalization, coral
 
 class StyleTransfer:
 
-  def __init__(self):
+  def __init__(self, enc_path, dec_path):
 
-    super().__init__(enc_path, dec_path)
+    super().__init__()
 
     vgg.load_state_dict(torch.load(enc_path))
     decoder.load_state_dict(torch.load(dec_path))
