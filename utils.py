@@ -98,7 +98,6 @@ def show_point_mask(image, point, mask, axis="on"):
 
 def show_image_mask_pairs(content_image, pairs):
 
-
   content_image = np.array(content_image)
 
   plt.figure()
