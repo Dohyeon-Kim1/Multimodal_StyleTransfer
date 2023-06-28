@@ -1,11 +1,12 @@
 import torch
+import torch.nn as nn
 import numpy as np
 
 from .net import vgg, decoder
 from .function import adaptive_instance_normalization, coral
 
 
-class StyleTransfer:
+class StyleTransfer(nn.Module):
 
   def __init__(self, enc_path, dec_path):
 
@@ -20,7 +21,7 @@ class StyleTransfer:
     self.enc.eval()
     self.dec.eval()
 
-  def run(self, content_img, style_img, alpha=1.0, preserve_color=True, device="cpu"):
+  def forward(self, content_img, style_img, alpha=1.0, preserve_color=True, device="cpu"):
 
     content_img = torch.FloatTensor(content_img).permute(2,0,1)
     style_img = torch.FloatTensor(style_img).permute(2,0,1)

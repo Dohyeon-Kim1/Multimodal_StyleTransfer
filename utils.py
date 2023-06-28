@@ -116,6 +116,8 @@ def show_image_mask_pairs(content_image, pairs):
     idx += 1
 
   plt.show()
+  print()
+  time.sleep(0.5)
 
 def mask_by_point(masks, point):
 
