@@ -32,11 +32,11 @@ class StyleTransfer:
     style_img = style_img.unsqueeze(0).to(device)
 
     with torch.no_grad():
-      content_feat = self.vgg_enc(content_img)
-      style_feat = self.vgg_enc(style_img)
+      content_feat = self.enc(content_img)
+      style_feat = self.enc(style_img)
       new_feat = adaptive_instance_normalization(content_feat, style_feat)
       new_feat = alpha*new_feat + (1-alpha)*content_feat
-      new_img = self.vgg_dec(new_feat)
+      new_img = self.dec(new_feat)
 
     new_img = new_img.squeeze(0).permute(1,2,0).cpu().numpy()
     new_img = np.clip(new_img, 0, 1)
