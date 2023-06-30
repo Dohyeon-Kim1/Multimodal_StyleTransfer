@@ -105,6 +105,9 @@ def show_image_mask_pairs(content_image, pairs):
 
   for mask, image in pairs:
 
+    if image is None:
+      image = content_image.copy()
+    
     plt.subplot(len(pairs),2,idx)
     plt.imshow(Image.fromarray(content_image*np.stack([mask,mask,mask], axis=2)))
     plt.axis("off")
