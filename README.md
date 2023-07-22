@@ -46,6 +46,17 @@ accelerate
 
 ## 사용한 모델
 
+### Text-to-Image Generator
+
+AdalN
+
+### Segmentation
+SAM
+
+### Style_Transfer
+
+stable_diffusion
+
 # Sample Image
 
 !! sample image 추가 해주세용 !!
