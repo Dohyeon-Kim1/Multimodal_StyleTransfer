@@ -15,13 +15,12 @@
 
 👉 click image <br>
 
-<center><img width="70%" alt="image" src="./image/step_2_1.png"></center> <br>
-
+<center><img width="70%" alt="image" src="./image/step_2_1.png"></center> 
 <center><img width="70%" alt="image" src="./image/step_2_2.png"></center> <br>
 
 👉 style image url/path/create <br>
 
-<center><img width="70%" alt="image" src="./image/step_2_3.png"></center> <br>
+<center><img width="70%" alt="image" src="./image/step_2_3.png"></center> 
 <center><img width="70%" alt="image" src="./image/step_2_4.png"></center> <br>
 
 👉 check pairs <br>
