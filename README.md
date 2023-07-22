@@ -34,7 +34,15 @@
 # Requirement
 
 ```python
-
+torch
+numpy
+Pillow
+matplotlib
+diffusers
+transformers
+scipy
+ftfy
+accelerate
 ```
 
 ## 사용한 모델
