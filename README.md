@@ -8,7 +8,7 @@
    - path <br>
        <center><img width="50%" alt="image" src="./image/step_1_path.png"></center>
    - create <br>
-       <center><img width="50%" alt="image" src="./image/step_1_create.png"></center>
+       <center><img width="50%" alt="image" src="./image/step_1_create.png"></center> <br>
        - select guidance scale value: 높으면 텍스트를 강하게 적용하고, 낮으면 이미지를 더 창의적으로 만듭니다. <br>
        - select diffusion step value: 25가 적절한 시간 안에 적당한 퀄리티의 이미지를 생성합니다.
 ## 2. style content 불러오기 및 씌울 마스크 부분 결정
