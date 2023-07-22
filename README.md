@@ -48,14 +48,13 @@ accelerate
 
 ### Text-to-Image Generator
 
-AdalN
+stable_diffusion
 
 ### Segmentation
 SAM
 
 ### Style_Transfer
-
-stable_diffusion
+AdalN
 
 # Sample Image
 
