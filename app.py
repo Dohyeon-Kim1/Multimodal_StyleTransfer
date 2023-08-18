@@ -51,6 +51,8 @@ if "content_image" not in st.session_state:
   st.session_state.content_image = None
 if "style_image" not in st.session_state:
   st.session_state.style_image = None
+if "no_image" not in st.session_state:
+  st.session_state.no_image = Image.open("image/style/no_apply.png")
 if "new_image" not in st.session_state:
   st.session_state.new_image = None
 if "merged_mask" not in st.session_state:
@@ -233,7 +235,7 @@ if st.session_state.step1 and not(st.session_state.step2):
             if st.session_state.merged_mask is None:
               st.error("There's no merged mask!")
             else:
-              st.session_state.pairs.append([st.session_state.merged_mask, st.session_state.content_image])
+              st.session_state.pairs.append([st.session_state.merged_mask, None])
               st.session_state.merged_mask = None
               empty_memory()
               st.experimental_rerun()
@@ -274,7 +276,7 @@ if st.session_state.step1 and not(st.session_state.step2):
               st.experimental_rerun()
 
             if button_noapply2:
-              st.session_state.pairs.append([mask_bg, st.session_state.content_image])
+              st.session_state.pairs.append([mask_bg, None])
               empty_memory()
               st.experimental_rerun()
 
@@ -311,6 +313,8 @@ if st.session_state.step1 and not(st.session_state.step2):
 
       if len(st.session_state.pairs) != 0:
         for mask, style_image in st.session_state.pairs:
+          if style_image is None:
+            style_image = st.session_state.no_image
           col1, col2 = st.columns([1,1])
           with col1:
             st.image(masked_image(st.session_state.content_image, mask), width=300)
@@ -335,7 +339,7 @@ if st.session_state.step1 and not(st.session_state.step2):
     st.image(masked_image(st.session_state.content_image, st.session_state.merged_mask), width=300)
 
     ## select how to load image
-    option = st.radio("Select how to load the style image",("upload","url","path","create"))
+    option = st.radio("Select how to load the style image",("upload","url","create","sample image"))
 
     ## load image from upload
     if option == "upload":
@@ -352,16 +356,6 @@ if st.session_state.step1 and not(st.session_state.step2):
         button_url = st.form_submit_button("load")
         if button_url:
           image = Image.open(requests.get(url, stream=True).raw)
-        else:
-          image = None
-
-    ## load image from path
-    elif option == "path":
-      with st.form(key="path"):
-        path = st.text_input("Enter the path")
-        button_path = st.form_submit_button("load")
-        if button_path:
-          image = Image.open(path)
         else:
           image = None
 
@@ -385,6 +379,48 @@ if st.session_state.step1 and not(st.session_state.step2):
         else:
           image = None
 
+    ## sample image
+    elif option == "sample image":
+      style_list = ("antimonocromatismo", "asheville", "picasso seated nude hr", "brushstrokes",
+                    "picasso self portrait", "contrast of forms", "scene de rue", "en campo gris",
+                    "sketch elsa", "flower of life", "the resevoir at poitiers", "trial", "la muse",
+                    "mondrian", "woman with hat matisse", "van gogh starry night")
+      style = st.selectbox("Select style image which you want", style_list)
+      if style == "antimonocromatismo":
+        image = Image.open("image/style/antimonocromatismo.jpg")
+      elif style == "asheville":
+        image = Imaeg.open("image/style/asheville.jpg")
+      elif style == "picasso seated nude hr":
+        image = Imaeg.open("image/style/picasso_seated_nude_hr.jpg")
+      elif style == "brushstrokes":
+        image = Imaeg.open("image/style/brushstrokes.jpg")
+      elif style == "picasso self portrait":
+        image = Imaeg.open("image/style/picasso_self_portrait.jpg")
+      elif style == "contrast of forms":
+        image = Imaeg.open("image/style/contrast_of_forms.jpg")
+      elif style == "scene de rue":
+        image = Imaeg.open("image/style/scene_de_rue.jpg")
+      elif style == "en campo gris":
+        image = Imaeg.open("image/style/en_campo_gris.jpg")
+      elif style == "sketch elsa":
+        image = Imaeg.open("image/style/sketch_elsa.jpeg")
+      elif style == "flower of life":
+        image = Imaeg.open("image/style/flower_of_life.jpg")
+      elif style == "the resevoir at poitiers":
+        image = Imaeg.open("image/style/the_resevoir_at_poitiers.jpg")
+      elif style == "trial":
+        image = Imaeg.open("image/style/trial.jpg")
+      elif style == "la muse":
+        image = Imaeg.open("image/style/la_muse.jpg")
+      elif style == "mondrian":
+        image = Imaeg.open("image/style/mondrian.jpg")
+      elif style == "woman with hat matisse":
+        image = Imaeg.open("image/style/woman_with_hat_matisse.jpg")
+      elif style == "van gogh starry night":
+        image = Imaeg.open("image/style/van_gogh_starry_night.jpeg")
+      else:
+        image = None
+        
     if image is not None:
       ## resize image for memory when either width or height is larger than 512
       w, h = image.size
@@ -443,6 +479,8 @@ if st.session_state.step1 and st.session_state.step2:
   ## show created mask & style image pairs
   st.markdown("##### Showing Created Mask & Style Image Pairs")
   for mask, style_image in st.session_state.pairs:
+    if style_image is None:
+      style_image = st.session_state.no_image
     col1, col2 = st.columns([1,1])
     with col1:
       st.image(masked_image(st.session_state.content_image, mask), width=300)
