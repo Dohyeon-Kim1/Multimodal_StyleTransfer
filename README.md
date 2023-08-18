@@ -1,38 +1,46 @@
 # Introduce
 
-<center><img width="100%" alt="image" src="./image/framework.png"></center>
+<center><img width="100%" alt="image" src="./image/framework.png"></center> <br>
 
-## 1. `url/path/create` 를 통해서 스타일을 바꾸고 싶은 이미지를 선택합니다.
-   - url <br>
-       <center><img width="50%" alt="image" src="./image/step_1_url.png"></center>
-   - path <br>
-       <center><img width="50%" alt="image" src="./image/step_1_path.png"></center>
-   - create <br>
-       <center><img width="50%" alt="image" src="./image/step_1_create.png"></center> <br>
-       - select guidance scale value: 높으면 텍스트를 강하게 적용하고, 낮으면 이미지를 더 창의적으로 만듭니다. <br>
-       - select diffusion step value: 25가 적절한 시간 안에 적당한 퀄리티의 이미지를 생성합니다.
-## 2. style content 불러오기 및 씌울 마스크 부분 결정
+# How to Use
 
-👉 click image <br>
+### 1. `upload/url/path/create` 를 통해 스타일을 바꾸고 싶은 이미지를 선택
+- upload <br>
+    <img width="60%" alt="image" src="./image/step_1_upload.png">
+- url <br>
+    <img width="60%" alt="image" src="./image/step_1_url.png">
 
+- path <br>
+    <img width="60%" alt="image" src="./image/step_1_path.png">
+
+- create <br>
+    <img width="60%" alt="image" src="./image/step_1_create.png"> <br>
+
+### 2. style content 불러오기 및 씌울 마스크 부분 결정
+
+- 이미지에서 스타일을 바꾸고 싶은 부분을 클릭하여 그 부분에 대한 마스크를 생성하고 합치기 <br>
 <center><img width="70%" alt="image" src="./image/step_2_1.png"></center> 
 <center><img width="70%" alt="image" src="./image/step_2_2.png"></center> <br>
 
-👉 style image url/path/create <br>
+- 합쳐진 마스크 부분에 대해서 `go to select style image` 버튼을 눌러 스타일 이미지를 선택 <br>
+(`no apply style image` 버튼을 누르면 합쳐진 마스크 부분에 대해서 스타일을 바꾸지 않고 원래 이미지 그대로 사용) <br>
+<center><img width="70%" alt="image" src="./image/step_2_3_1.png"></center> <br>
 
-<center><img width="70%" alt="image" src="./image/step_2_3.png"></center> 
+- 아직 선택되지 않은 부분에 대해서 스타일 이미지를 선택 <br>
+<center><img width="70%" alt="image" src="./image/step_2_3.png"></center> <br>
+
+- 선택된 이미지에 대해 각각의 스타일 이미지 선택 <br>
 <center><img width="70%" alt="image" src="./image/step_2_4.png"></center> <br>
 
-👉 check pairs <br>
+- 선택된 부분과 스타일 이미지 쌍 확인 후 선택된 부분별로 각각 다른 스타일 적용 <br>
+<center><img width="70%" alt="image" src="./image/step_2_5.png"></center> 
 
-<center><img width="70%" alt="image" src="./image/step_2_5.png"></center> <br>
-
-## 3. 선택한 마스크에 pair style image 적용시키기
+### 3. 선택한 마스크에 pair style image 적용시키기
 <center><img width="70%" alt="image" src="./image/sample.png"></center> <br>
 
 # Requirement
 
-```python
+```txt
 torch
 numpy
 Pillow
@@ -42,25 +50,31 @@ transformers
 scipy
 ftfy
 accelerate
-```
+``` 
+<br>
 
-## 사용한 모델
+# 사용한 모델
 
 ### Text-to-Image Generator
 
-stable_diffusion
+[***Stable Diffusion***](https://github.com/Stability-AI/stablediffusion) <br>
+<center><img width="100%" alt="image" src="./image/stablediffusion.jpg"></center> 
 
 ### Segmentation
-SAM
 
-### Style_Transfer
-AdalN
+[***SAM***](https://github.com/facebookresearch/segment-anything)
+<center><img width="100%" alt="image" src="./image/sam.png"></center> 
+
+### Style Transfer
+
+[***AdalN***](https://github.com/naoto0804/pytorch-AdaIN)
+<center><img width="100%" alt="image" src="./image/adain.png"></center>  <br>
 
 # Sample Image
 
-!! sample image 추가 해주세용 !!
+<center><img width="100%" alt="image" src="./image/sample.png"></center> 
+<center><img width="100%" alt="image" src="./image/sample2.png"></center> <br>
 
-<center><img width="100%" alt="image" src="./image/sample.png"></center> <br>
 
 # Contributions
 
