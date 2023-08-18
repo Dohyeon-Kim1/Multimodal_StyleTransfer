@@ -74,8 +74,12 @@ accelerate
 # Sample Image
 
 <p align="center">
-  <img width="25%" src="./image/sample.png">
-  <img width="25%" src="./image/sample2.png">
+  <img width="40%" src="./image/sample.png">
+  <img width="40%" src="./image/sample2.png">
+</p>
+<p align="center">
+  <img width="40%" src="./image/sample3.png">
+  <img width="40%" src="./image/sample4.png">
 </p>
 
 # Contributions
