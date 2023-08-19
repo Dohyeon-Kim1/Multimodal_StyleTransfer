@@ -79,7 +79,7 @@ if not(st.session_state.step1):
   if option == "upload":
     file = st.file_uploader("Upload content image", type=["png","jpg","jpeg"])
     if file is not None:
-      image = Image.open(file)
+      image = Image.open(file).convert("RGB")
     else:
       image = None
 
@@ -89,7 +89,7 @@ if not(st.session_state.step1):
       url = st.text_input("Enter the url")
       button_url = st.form_submit_button("load")
       if button_url:
-        image = Image.open(requests.get(url, stream=True).raw)
+        image = Image.open(requests.get(url, stream=True).raw).convert("RGB")
       else:
         image = None
 
@@ -99,7 +99,7 @@ if not(st.session_state.step1):
       path = st.text_input("Enter the path")
       button_path = st.form_submit_button("load")
       if button_path:
-        image = Image.open(path)
+        image = Image.open(path).convert("RGB")
       else:
         image = None
 
@@ -119,7 +119,7 @@ if not(st.session_state.step1):
       diffusion_step = st.slider("Select diffusion step value", 1, 50, 25, help=diffusion_step_help)
       button_create = st.form_submit_button("create")
       if button_create:
-        image =  st.session_state.stable_diffusion(text, guidance_scale=guidance_scale, num_inference_steps=diffusion_step).images[0]
+        image = st.session_state.stable_diffusion(text, guidance_scale=guidance_scale, num_inference_steps=diffusion_step).images[0]
       else:
         image = None
 
@@ -345,7 +345,7 @@ if st.session_state.step1 and not(st.session_state.step2):
     if option == "upload":
       file = st.file_uploader("Upload content image", type=["png","jpg","jpeg"])
       if file is not None:
-        image = Image.open(file)
+        image = Image.open(file).convert("RGB")
       else:
         image = None
 
@@ -355,7 +355,7 @@ if st.session_state.step1 and not(st.session_state.step2):
         url = st.text_input("Enter the url")
         button_url = st.form_submit_button("load")
         if button_url:
-          image = Image.open(requests.get(url, stream=True).raw)
+          image = Image.open(requests.get(url, stream=True).raw).convert("RGB")
         else:
           image = None
 
@@ -387,37 +387,37 @@ if st.session_state.step1 and not(st.session_state.step2):
                     "mondrian", "woman with hat matisse", "van gogh starry night")
       style = st.selectbox("Select style image which you want", style_list)
       if style == "antimonocromatismo":
-        image = Image.open("image/style/antimonocromatismo.jpg")
+        image = Image.open("image/style/antimonocromatismo.jpg").convert("RGB")
       elif style == "asheville":
-        image = Imaeg.open("image/style/asheville.jpg")
+        image = Image.open("image/style/asheville.jpg").convert("RGB")
       elif style == "picasso seated nude hr":
-        image = Imaeg.open("image/style/picasso_seated_nude_hr.jpg")
+        image = Image.open("image/style/picasso_seated_nude_hr.jpg").convert("RGB")
       elif style == "brushstrokes":
-        image = Imaeg.open("image/style/brushstrokes.jpg")
+        image = Image.open("image/style/brushstrokes.jpg").convert("RGB")
       elif style == "picasso self portrait":
-        image = Imaeg.open("image/style/picasso_self_portrait.jpg")
+        image = Image.open("image/style/picasso_self_portrait.jpg").convert("RGB")
       elif style == "contrast of forms":
-        image = Imaeg.open("image/style/contrast_of_forms.jpg")
+        image = Image.open("image/style/contrast_of_forms.jpg").convert("RGB")
       elif style == "scene de rue":
-        image = Imaeg.open("image/style/scene_de_rue.jpg")
+        image = Image.open("image/style/scene_de_rue.jpg").convert("RGB")
       elif style == "en campo gris":
-        image = Imaeg.open("image/style/en_campo_gris.jpg")
+        image = Image.open("image/style/en_campo_gris.jpg").convert("RGB")
       elif style == "sketch elsa":
-        image = Imaeg.open("image/style/sketch_elsa.jpeg")
+        image = Image.open("image/style/sketch_elsa.jpeg").convert("RGB")
       elif style == "flower of life":
-        image = Imaeg.open("image/style/flower_of_life.jpg")
+        image = Image.open("image/style/flower_of_life.jpg").convert("RGB")
       elif style == "the resevoir at poitiers":
-        image = Imaeg.open("image/style/the_resevoir_at_poitiers.jpg")
+        image = Image.open("image/style/the_resevoir_at_poitiers.jpg").convert("RGB")
       elif style == "trial":
-        image = Imaeg.open("image/style/trial.jpg")
+        image = Image.open("image/style/trial.jpg").convert("RGB")
       elif style == "la muse":
-        image = Imaeg.open("image/style/la_muse.jpg")
+        image = Image.open("image/style/la_muse.jpg").convert("RGB")
       elif style == "mondrian":
-        image = Imaeg.open("image/style/mondrian.jpg")
+        image = Image.open("image/style/mondrian.jpg").convert("RGB")
       elif style == "woman with hat matisse":
-        image = Imaeg.open("image/style/woman_with_hat_matisse.jpg")
+        image = Image.open("image/style/woman_with_hat_matisse.jpg").convert("RGB")
       elif style == "van gogh starry night":
-        image = Imaeg.open("image/style/van_gogh_starry_night.jpeg")
+        image = Image.open("image/style/van_gogh_starry_night.jpeg").convert("RGB")
       else:
         image = None
         
