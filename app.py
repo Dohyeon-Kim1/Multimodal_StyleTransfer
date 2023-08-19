@@ -506,7 +506,7 @@ if st.session_state.step1 and st.session_state.step2:
       ## create style transfered image
       for mask, style_image in st.session_state.pairs:
         ## not style transfer for the mask part
-        if style_image == st.session_state.content_image:
+        if style_image is None:
           new_image += (np.array(st.session_state.content_image)/255) * np.stack([mask,mask,mask], axis=2)
         ## style transfer for the mask part
         else:
