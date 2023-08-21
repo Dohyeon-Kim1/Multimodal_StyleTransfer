@@ -1,6 +1,8 @@
+%%writefile app.py
+
 import streamlit as st
 from streamlit_image_coordinates import streamlit_image_coordinates
-from utils_app import empty_memory, masked_image, merge_masks
+from utils.utils_app import empty_memory, masked_image, merge_masks
 
 st.title("Make Your Own Image!")
 
@@ -18,7 +20,7 @@ if "models" not in st.session_state:
   st.subheader("Loading Models ..")
 
   from diffusers import StableDiffusionPipeline
-  from models.SAM.segment_anything import sam_model_registry, SamAutomaticMaskGenerator, SamPredictor
+  from models.SAM.segment_anything import sam_model_registry, SamPredictor
   from models.AdaIN.inference import StyleTransfer
 
   progress_bar = st.progress(0, text="0/3")
@@ -69,7 +71,7 @@ if not(st.session_state.step1):
   with st.expander("See Explanation", expanded=False):
     st.markdown("In this step, load or create an image of which style will be changed, which is called **'content image'**.")
     st.markdown("If you are satisfied with the content image, you can click **'next'** button to go to the next step.")
-  
+
   st.divider()
 
   ## select how to load image
@@ -162,7 +164,7 @@ if st.session_state.step1 and not(st.session_state.step2):
     st.markdown("In here, **'style image'** means the image which has the artistic style or visual characteristics that we'd like to transfer to the content image.")
     st.markdown("If you want to create new content image, you can click **'prev'** button to go back to the previous step.")
     st.markdown("If you are satisfied with the created mask & style image pairs, you can click **'next'** button to go to the next step.")
-  
+
   st.divider()
 
   if st.session_state.get_mask:
@@ -193,7 +195,7 @@ if st.session_state.step1 and not(st.session_state.step2):
             st.image(st.session_state.content_image, width=300)
 
           ## "add to merged mask" button
-          button_add = st.form_submit_button("add to Merged Mask")
+          button_add = st.form_submit_button("add to Merged Mask",)
           if button_add:
             if selected_mask is None:
               st.error("There's no selected mask!")
@@ -312,14 +314,21 @@ if st.session_state.step1 and not(st.session_state.step2):
       st.markdown("##### Showing Mask & Style Image Pairs")
 
       if len(st.session_state.pairs) != 0:
-        for mask, style_image in st.session_state.pairs:
-          if style_image is None:
-            style_image = st.session_state.no_image
-          col1, col2 = st.columns([1,1])
-          with col1:
-            st.image(masked_image(st.session_state.content_image, mask), width=300)
-          with col2:
-            st.image(style_image, width=300)
+        for idx, (mask, style_image) in enumerate(st.session_state.pairs):
+          with st.form(key=f"pair {idx+1}"):
+            st.markdown(f"Pair {idx+1}")
+            if style_image is None:
+              style_image = st.session_state.no_image
+            col1, col2 = st.columns([1,1])
+            with col1:
+              st.image(masked_image(st.session_state.content_image, mask), width=300)
+            with col2:
+              st.image(style_image, width=300)
+            button_reset = st.form_submit_button("reset pair")
+            if button_reset:
+              del st.session_state.pairs[idx]
+              empty_memory()
+              st.experimental_rerun()
       else:
         st.markdown("There's no mask & style image pair!")
 
@@ -381,46 +390,29 @@ if st.session_state.step1 and not(st.session_state.step2):
 
     ## sample image
     elif option == "sample image":
-      style_list = ("antimonocromatismo", "asheville", "picasso seated nude hr", "brushstrokes",
-                    "picasso self portrait", "contrast of forms", "scene de rue", "en campo gris",
-                    "sketch elsa", "flower of life", "the resevoir at poitiers", "trial", "la muse",
-                    "mondrian", "woman with hat matisse", "van gogh starry night")
-      style = st.selectbox("Select style image which you want", style_list)
-      if style == "antimonocromatismo":
-        image = Image.open("image/style/antimonocromatismo.jpg").convert("RGB")
-      elif style == "asheville":
-        image = Image.open("image/style/asheville.jpg").convert("RGB")
-      elif style == "picasso seated nude hr":
-        image = Image.open("image/style/picasso_seated_nude_hr.jpg").convert("RGB")
-      elif style == "brushstrokes":
-        image = Image.open("image/style/brushstrokes.jpg").convert("RGB")
-      elif style == "picasso self portrait":
-        image = Image.open("image/style/picasso_self_portrait.jpg").convert("RGB")
-      elif style == "contrast of forms":
-        image = Image.open("image/style/contrast_of_forms.jpg").convert("RGB")
-      elif style == "scene de rue":
-        image = Image.open("image/style/scene_de_rue.jpg").convert("RGB")
-      elif style == "en campo gris":
-        image = Image.open("image/style/en_campo_gris.jpg").convert("RGB")
-      elif style == "sketch elsa":
-        image = Image.open("image/style/sketch_elsa.jpeg").convert("RGB")
-      elif style == "flower of life":
-        image = Image.open("image/style/flower_of_life.jpg").convert("RGB")
-      elif style == "the resevoir at poitiers":
-        image = Image.open("image/style/the_resevoir_at_poitiers.jpg").convert("RGB")
-      elif style == "trial":
-        image = Image.open("image/style/trial.jpg").convert("RGB")
-      elif style == "la muse":
-        image = Image.open("image/style/la_muse.jpg").convert("RGB")
-      elif style == "mondrian":
-        image = Image.open("image/style/mondrian.jpg").convert("RGB")
-      elif style == "woman with hat matisse":
-        image = Image.open("image/style/woman_with_hat_matisse.jpg").convert("RGB")
-      elif style == "van gogh starry night":
-        image = Image.open("image/style/van_gogh_starry_night.jpeg").convert("RGB")
+      sample_dict = {"select": None, 
+                    "antimonocromatismo": "image/style/antimonocromatismo.jpg", 
+                    "asheville": "image/style/asheville.jpg", 
+                    "picasso seated nude hr": "image/style/picasso_seated_nude_hr.jpg", 
+                    "brushstrokes": "image/style/brushstrokes.jpg",
+                    "picasso self portrait": "image/style/picasso_self_portrait.jpg", 
+                    "contrast of forms": "image/style/contrast_of_forms.jpg", 
+                    "scene de rue": "image/style/scene_de_rue.jpg", 
+                    "en campo gris": "image/style/en_campo_gris.jpg",
+                    "sketch elsa": "image/style/sketch_elsa.jpeg", 
+                    "flower of life": "image/style/flower_of_life.jpg", 
+                    "the resevoir at poitiers": "image/style/the_resevoir_at_poitiers.jpg", 
+                    "trial": "image/style/trial.jpg", 
+                    "la muse": "image/style/la_muse.jpg",
+                    "mondrian": "image/style/mondrian.jpg", 
+                    "woman with hat matisse": "image/style/woman_with_hat_matisse.jpg", 
+                    "starry night": "image/style/van_gogh_starry_night.jpeg"}
+      style = st.selectbox("Select style image which you want", list(sample_dict.keys()))
+      if style != "select":
+        image = Image.open(sample_dict[style]).convert("RGB")
       else:
         image = None
-        
+
     if image is not None:
       ## resize image for memory when either width or height is larger than 512
       w, h = image.size
@@ -473,14 +465,15 @@ if st.session_state.step1 and st.session_state.step2:
   with st.expander("See Explanation", expanded=False):
     st.markdown("In this step, apply the style of the style image to the mask part of the content image for all mask & style image pairs.")
     st.markdown("If you want to create new mask & style image pairs, you can click **'prev'** button to go back the previous step.")
-  
+
   st.divider()
 
   ## show created mask & style image pairs
   st.markdown("##### Showing Created Mask & Style Image Pairs")
-  for mask, style_image in st.session_state.pairs:
+  for idx, (mask, style_image) in enumerate(st.session_state.pairs):
     if style_image is None:
       style_image = st.session_state.no_image
+    st.markdown(f"Pair {idx+1}")
     col1, col2 = st.columns([1,1])
     with col1:
       st.image(masked_image(st.session_state.content_image, mask), width=300)
@@ -496,15 +489,21 @@ if st.session_state.step1 and st.session_state.step2:
   However, if not checked, the overall color of the style image will be applied to style transferd image."
 
   with st.form("style_transfer"):
-    alpha = st.slider("Select alpha value", 0.0, 1.0, 0.5, help=alpha_help)
-    preserve_color = st.checkbox("Peserve color", True, help=preserve_color_help)
+    option_list = []
+    for idx, (mask, style_image) in enumerate(st.session_state.pairs):
+      if style_image is not None:
+        alpha = st.slider(f"Select alpha value (Pair {idx+1})", 0.0, 1.0, 0.5, key=f"alpha_{idx+1}", help=alpha_help)
+        preserve_color = st.checkbox(f"Preserve color (Pair {idx+1})", True, key=f"preserve_color_{idx+1}", help=preserve_color_help)
+        option_list.append([alpha, preserve_color])
+      else:
+        option_list.append([None, None])
     button_run = st.form_submit_button("style transfer")
 
     if button_run:
       new_image = np.zeros_like(np.array(st.session_state.content_image), dtype=np.float32)
 
       ## create style transfered image
-      for mask, style_image in st.session_state.pairs:
+      for (mask, style_image), (alpha, preserve_color) in zip(st.session_state.pairs, option_list):
         ## not style transfer for the mask part
         if style_image is None:
           new_image += (np.array(st.session_state.content_image)/255) * np.stack([mask,mask,mask], axis=2)
