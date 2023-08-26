@@ -30,10 +30,10 @@
 - 위 내용을 반복하여 자유롭게 마스크와 스타일 이미지 쌍 생성하기 <br>
 
 - 아직 선택되지 않은 부분에 대해서 스타일 이미지를 선택하기 <br>
-    <center><img width="70%" alt="image" src="./image/step/step_2_3.png"></center> <br>
+    <center><img width="70%" alt="image" src="./image/step/step_2_4.png"></center> <br>
 
-- 선택된 부분과 스타일 이미지 쌍 확인 후 선택된 부분별로 각각 다른 스타일 적용하기 <br>
-    <center><img width="70%" alt="image" src="./image/step/step_2_4.png"></center> 
+- `Show Pairs` 탭에서 생성된 마스크와 스타일 이미지 쌍 확인하기 <br>
+    <center><img width="70%" alt="image" src="./image/step/step_2_5.png"></center> 
 
 ### 3. 생성된 마스크와 스타일 이미지 쌍으로 Style Transfer 적용하기
 
