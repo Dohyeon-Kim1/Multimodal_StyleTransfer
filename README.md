@@ -7,16 +7,16 @@
 ### 1. `upload/url/path/create` 를 통해 스타일을 바꾸고 싶은 이미지를 선택하기
 
 - upload <br>
-    <img width="60%" alt="image" src="./image/step_1_upload.png">
+    <img width="60%" alt="image" src="./image/step/step_1_upload.png">
 
 - url <br>
-    <img width="60%" alt="image" src="./image/step_1_url.png">
+    <img width="60%" alt="image" src="./image/step/step_1_url.png">
 
 - path <br>
-    <img width="60%" alt="image" src="./image/step_1_path.png">
+    <img width="60%" alt="image" src="./image/step/step_1_path.png">
 
 - create <br>
-    <img width="60%" alt="image" src="./image/step_1_create.png"> <br>
+    <img width="60%" alt="image" src="./image/step/step_1_create.png"> <br>
 
 ### 2. 스타일을 바꾸고 싶은 이미지에서 마스크와 스타일 이미지 쌍 생성하기
 
@@ -59,7 +59,7 @@ accelerate
 ### Text-to-Image Generator
 
 [***Stable Diffusion***](https://github.com/Stability-AI/stablediffusion) <br>
-<center><img width="100%" alt="image" src="./image/models/stablediffusion.jpg"></center> 
+<center><img width="100%" alt="image" src="./image/model/stablediffusion.jpg"></center> 
 
 ### Segmentation
 
@@ -75,7 +75,7 @@ accelerate
 
 <p align="center">
   <img width="40%" src="./image/sample/sample1.png">
-  <img width="40%" src="./images/ample/sample3.png">
+  <img width="40%" src="./image/sample/sample3.png">
 </p>
 <p align="center">
   <img width="40%" src="./image/sample/sample4.png">
