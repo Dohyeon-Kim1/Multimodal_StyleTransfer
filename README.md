@@ -2,6 +2,11 @@
 
 <center><img width="100%" alt="image" src="./image/framework.png"></center> <br>
 
+# Quick Start
+
+- Colab ver : [***demo.ipynb***] (https://colab.research.google.com/drive/1z7H2DO9HZMtw-ylNCzoU0RafJKTRAeZU?usp=sharing)
+- Colab+Web ver : [***demo_web.ipynb] (https://colab.research.google.com/drive/1JzZe3k9A-kHUvxVlpCXFbHOXIufeOk-F?usp=sharing)
+
 # How to Use
 
 ### 1. `upload/url/path/create` 를 통해 스타일을 바꾸고 싶은 이미지를 선택하기
