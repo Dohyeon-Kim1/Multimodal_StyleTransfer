@@ -4,8 +4,11 @@
 
 # Quick Start
 
-- Colab ver : [***demo.ipynb***] (https://colab.research.google.com/drive/1z7H2DO9HZMtw-ylNCzoU0RafJKTRAeZU?usp=sharing)
-- Colab+Web ver : [***demo_web.ipynb] (https://colab.research.google.com/drive/1JzZe3k9A-kHUvxVlpCXFbHOXIufeOk-F?usp=sharing)
+- Colab ver
+[***demo.ipynb***] (https://colab.research.google.com/drive/1z7H2DO9HZMtw-ylNCzoU0RafJKTRAeZU?usp=sharing)
+
+- Colab+Web ver
+[***demo_web.ipynb***] (https://colab.research.google.com/drive/1JzZe3k9A-kHUvxVlpCXFbHOXIufeOk-F?usp=sharing)
 
 # How to Use
 
